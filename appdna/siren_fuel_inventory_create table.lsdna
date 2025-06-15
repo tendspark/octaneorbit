@@ -1,0 +1,39 @@
+//dna options== Digital Nexus Architecture (DNA)
+
+$dna_file_name="fuel_inventory_create table"; 
+$create_dna="yes"; //yes | no; 
+$overwrite_dna_file="yes"; //yes | no 
+//dna options==//=========== GENERAL STOCK ITEMS TABLE (Flexible + Lingo Enhanced)
+$general_stock_items_script = "
+`primkey` int(200) PRIMARY KEY AUTO_INCREMENT,
+`record_id` varchar(500) NOT NULL,
+`station_id` varchar(500) NOT NULL, -- FK to fuel_stations.record_id
+
+`item_name` varchar(500) NOT NULL, -- Diesel 500ppm, Super Petrol
+`fuel_type` varchar(500) NOT NULL, -- Petrol, Diesel, LPG, Kerosene
+`fuel_grade` varchar(500) DEFAULT NULL, -- e.g., Premium, Regular, 500ppm
+
+`current_stock_litres` varchar(500) NOT NULL, -- Actual wet stock
+`density_kg_per_m3` varchar(500) DEFAULT NULL, -- Observed density
+`volume_correction_factor` varchar(500) DEFAULT NULL, -- API 2540 VCF
+
+
+`manual_dip_reading_litres` varchar(500) NOT NULL, -- Measured manually
+`atg_reading_litres` varchar(500) NOT NULL, -- Automated Tank Gauge (if present)
+
+`expected_volume_litres` varchar(500) NOT NULL, -- Based on deliveries + usage
+`percentage_variance` varchar(500) NOT NULL, -- ((expected - actual) / actual) * 100
+
+`variance_reason_code` varchar(500) NOT NULL, -- shrinkage, overage, calibration_issue, leak_suspected
+
+`tank_reference` varchar(500) NOT NULL, -- Tank name or compartment ID
+`stock_status` varchar(500) NOT NULL, -- available, locked, under_investigation
+`stock_condition` varchar(500) NOT NULL, -- in_use, pending_restock, under_audit
+
+`last_updated_on` varchar(500) NOT NULL,
+`created_on` DATE NOT NULL
+";
+
+
+$general_stock_items_table = 'fuel_inventory';
+create_table($mysqliconn, $dbname, $general_stock_items_table, $general_stock_items_script);

@@ -1,0 +1,10 @@
+# Build output
+.next/
+
+# Dependencies
+node_modules/
+
+# Custom folders
+terminal/
+
+openai.php

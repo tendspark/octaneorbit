@@ -1,0 +1,24 @@
+//dna options== Digital Nexus Architecture (DNA) 
+$dna_file_name = "db_creation_Script"; 
+$create_dna = "yes"; //yes | no; 
+$overwrite_dna_file = "yes"; //yes | no 
+//dna options==
+
+
+//======= create table in db
+
+//=========== CLIENTS TABLE
+$client_table_script = "
+`primkey` int(11) PRIMARY KEY AUTO_INCREMENT,
+`station_id` varchar(100) NOT NULL,
+`date_deposited` varchar(255) NOT NULL,
+`amount_deposited` varchar(50),
+`payment_mode` varchar(255),
+`shift_id` varchar(255),
+`deposit_file_id` varchar(255),
+`remark` text
+";
+
+$client_table = 'deposits_by_mode';
+create_table($mysqliconn, $dbname, $client_table, $client_table_script);
+

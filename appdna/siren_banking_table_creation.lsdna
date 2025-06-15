@@ -1,0 +1,36 @@
+//dna options== Digital Nexus Architecture (DNA)
+
+$dna_file_name="banking_table_creation"; 
+$create_dna="yes"; //yes | no; 
+$overwrite_dna_file="yes"; //yes | no 
+//dna options==
+
+//=========== BANKING / SALES RECONCILIATION TABLE
+$fuel_banking_script = "
+`primkey` int(11) PRIMARY KEY AUTO_INCREMENT,
+`record_id` varchar(500) NOT NULL,
+
+`station_id` varchar(500) NOT NULL, -- FK to fuel_stations.record_id
+`shift_code` varchar(500) NOT NULL, -- e.g., SHIFT_A, NIGHT_1
+`record_date` date NOT NULL,
+`expected_sales_amount` varchar(500) NOT NULL, -- From pump readings
+`actual_banked_amount` varchar(500) NOT NULL, -- Amount banked by attendant
+
+`variance_amount` varchar(500) NOT NULL, -- expected - actual
+`variance_reason` varchar(500) NOT NULL, -- overbanked, underbanked, rounding, pilferage_suspected
+
+`banked_by` varchar(500) NOT NULL, -- Staff member
+`banked_on` varchar(500) NOT NULL, -- Actual date of bank deposit
+`bank_reference_code` varchar(500) NOT NULL, -- Deposit slip no., M-Pesa ref
+
+`banking_status` varchar(500) NOT NULL, -- confirmed, flagged, pending_investigation
+
+`payment_notes` varchar(500) NOT NULL, -- Any remarks
+`verified_by` varchar(500) NOT  NULL, -- Supervisor/reviewer
+`verified_on` varchar(500) NOT NULL";
+
+
+$banking_tbl = 'banking';
+create_table($mysqliconn, $dbname, $banking_tbl, $fuel_banking_script);
+
+

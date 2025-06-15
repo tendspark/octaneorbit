@@ -1,0 +1,48 @@
+//dna options== Digital Nexus Architecture (DNA)
+
+$dna_file_name="clients_create_table_"; 
+$create_dna="yes"; //yes | no; 
+$overwrite_dna_file="yes"; //yes | no 
+//dna options==
+
+//=========== CLIENTS TABLE (EXTENDED VERSION)
+$client_table_script = "
+
+`primkey` int(200) PRIMARY KEY AUTO_INCREMENT,
+
+`record_id` varchar(500) NOT NULL, -- unique internal UUID
+
+`client_name` varchar(500) NOT NULL,
+`client_type` varchar(500) NOT NULL, -- individual, fleet_account, corporate, walk-in
+
+`phone_number` varchar(500) NOT NULL,
+`alt_phone` varchar(500) NOT NULL,
+`email` varchar(500) NOT NULL,
+
+`national_id` varchar(500) NOT NULL, -- or Company Reg No for corporates
+`kra_pin` varchar(500) NOT NULL, -- Optional, tax reporting
+`vehicle_plate` varchar(500) NOT NULL, -- Optional, mostly for individuals
+
+`contact_person` varchar(500) NOT NULL, -- if corporate
+`payment_mode_preference` varchar(500) NOT NULL, -- mpesa, cash, credit, invoice, pos
+`credit_limit` varchar(500) NOT NULL, -- For corporate/fleet accounts
+`balance_due` varchar(500) NOT NULL, -- Outstanding balance for credit clients
+
+`client_status` varchar(500) NOT NULL, -- active, suspended, blacklisted
+`loyalty_points` varchar(500) NOT NULL, -- For reward tracking
+
+`physical_address` varchar(500) NOT NULL,
+`county` varchar(500) NOT NULL,
+`location_description` varchar(500) NOT NULL,
+
+`registered_by` varchar(500) NOT NULL, -- Staff username
+`registered_on` varchar(500) NOT NULL,
+
+`last_transaction_on` varchar(500) NOT NULL,
+`remarks` varchar(500) NOT NULL,
+
+`created_on` datetime DEFAULT CURRENT_TIMESTAMP
+";
+
+$client_table = 'clients';
+create_table($mysqliconn, $dbname, $client_table, $client_table_script);
