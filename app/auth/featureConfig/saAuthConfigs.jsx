@@ -25,8 +25,8 @@ const saAuthConfigs = {
   afterSplashPage:`${hiveRoutes.octaneorbit}/dashboard/main`,
 
   // UI toggles
-  showResetLink: true, // true || false
-  showCreateAccount: true, // true || false
+  showResetLink: false, // true || false
+  showCreateAccount: false, // true || false
 
   // Routes (UI component files/pages, not PHP scripts)
   loginUrl: "login",
