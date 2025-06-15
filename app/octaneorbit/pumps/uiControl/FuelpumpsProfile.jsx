@@ -25,11 +25,11 @@ import  FuelpumpsList from './FuelpumpsList';
 
 //nozzles data & component
 //list
-import FuelnozzlesList from '../../nozzles/UiControl/FuelnozzlesList';
+import FuelnozzlesList from '../../nozzles/uiControl/FuelnozzlesList';
 import {InteprateFuelnozzlesEvent} from '../../nozzles/dataControl/FuelnozzlesRequestHandler';
 
 //profile
-import FuelnozzlesProfile from '../../nozzles/UiControl/FuelnozzlesProfile';
+import FuelnozzlesProfile from '../../nozzles/uiControl/FuelnozzlesProfile';
 
 import {
   SubmitButtons,
