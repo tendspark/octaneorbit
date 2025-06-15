@@ -119,7 +119,7 @@ export default function FuelnozzlesProfile({ dataIn = {}, dataOut = {} }) {
   
   return (
     
-    <div className="p-0 col-md-12 text-center " id="FuelnozzlesProfileTray">
+    <div className="p-0 col-md-12 text-center row justify-content-center m-0  " id="FuelnozzlesProfileTray">
       {/* ================== Start Feature Section========================== ------*/}
       
       

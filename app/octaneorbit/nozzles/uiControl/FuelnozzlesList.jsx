@@ -96,8 +96,8 @@ export default function FuelnozzlesList({ dataIn = {}, dataOut = {} }) {
           </div>
           <div className="col-md-12 p-0 hive_list_nav_right_ribbon" id="">
             {/*--<navgation_buttons/>--*/}
-            <a href="list" className="medium_btn border border_set btn-white hive_list_nav_refresh ml-3"><i className="fa fa-refresh mr-1 "></i> Refresh </a>
             
+            <a href="list" className="medium_btn border border_set btn-white hive_list_nav_refresh ml-3"><i className="fa fa-refresh mr-1 "></i> Refresh </a>
             
             <AddNewButton link={customProfilePath} label="Add Nozzle" icon="plus-circle" />
           </div>

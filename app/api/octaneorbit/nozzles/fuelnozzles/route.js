@@ -4,6 +4,8 @@ import { mosySqlInsert, mosySqlUpdate, base64Decode, mosyFlexSelect, mosyUploadF
 
 import {FuelnozzlesRowMutations} from './FuelnozzlesRowMutations';
 
+import listFuelnozzlesRowMutationsKeys from './FuelnozzlesMutationKeys';
+
 //be gate keeper and auth 
 import { validateSelect } from '../../beMonitor';
 import { processAuthToken } from '../../../auth/authManager';
@@ -16,11 +18,11 @@ export async function GET(request) {
 
     const encodedMutations = searchParams.get('mutations');
 
-    let mutationsObj = {};
+    let requestedMutationsObj = {};
     if (encodedMutations) {
       try {
         const decodedMutations = Buffer.from(encodedMutations, 'base64').toString('utf-8');
-        mutationsObj = JSON.parse(decodedMutations);
+        requestedMutationsObj = JSON.parse(decodedMutations);
       } catch (err) {
         console.error('Mutation decode failed:', err);
       }
@@ -58,7 +60,10 @@ export async function GET(request) {
       );
 
     }
-
+ 
+    const isEmpty = (obj) => !obj || Object.keys(obj).length === 0;
+    const mutationsObj = isEmpty(requestedMutationsObj) ? listFuelnozzlesRowMutationsKeys : requestedMutationsObj;
+    
     if(requestValid){
     
       const result = await mosyFlexSelect(enhancedParams, mutationsObj, FuelnozzlesRowMutations);

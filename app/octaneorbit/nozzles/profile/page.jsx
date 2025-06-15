@@ -6,7 +6,7 @@ import { InteprateFuelnozzlesEvent } from '../dataControl/FuelnozzlesRequestHand
 
     
 export async function generateMetadata({ searchParams }) {
-  const mosyTitle = "Fuel nozzles"//searchParams?.mosyTitle || "Fuel nozzles";
+  const mosyTitle = "Fuel nozzles profile"//searchParams?.mosyTitle || "Fuel nozzles";
 
   return {
     title: mosyTitle ? decodeURIComponent(mosyTitle) : `Fuel nozzles profile`,

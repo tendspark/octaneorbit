@@ -2,28 +2,25 @@ eval(find_snippet('986'));
 eval(find_snippet("1171")); // camel case 
 
 $custom_col_main_file__="../appdna/custom_colums.php";
-$table_config_file__="../appdna/octaneorbit/fuel_sales/tbl_attr/tbl_attr_daily_sales_dnaaf.php";
-
+$table_config_file__="../appdna/octaneorbit/fuel_pumps/tbl_attr/tbl_attr_fuel_pumps_dnaaf.php";
 
 if(file_exists($custom_col_main_file__))
 {
   include($custom_col_main_file__);
 }
 
-$primary_table__="fuel_sales";
+$primary_table__="fuel_pumps";
 $tbl_id_column_name="primkey";
 $record_id_col_name="record_id";
 
 
-$nextjs_tbl_alias="sales";
+$nextjs_tbl_alias="pumps";
 
 // Report configurations
-$main_report_title_="Daily sales";
+$main_report_title_="Fuel pumps";
 $api_endpoint_name="manage";
 
-$multigrid_col_span="9";
-$enable_multigrid_view_more_link ="";
-  
+
 $last_file_name=str_replace(" ","", strtolower($main_report_title_));//$api_endpoint_name;
 
 $profile_file_name="profile";
@@ -31,10 +28,9 @@ $list_file_name="list";
 
 $back_to_list_ = "./$list_file_name";
 
-$photo_component_placeholders=["profilePic","photoNode"];
 
 $next_js_custom_profile_card=[
-"infoqqsnippets"=>[
+"adverets"=>[
   'card_name'=>"UserProfileCard", 
  "layout_tag"=>'
  <UserProfileCard
@@ -48,14 +44,14 @@ $next_js_custom_profile_card=[
 
 
 $next_js_custom_List_card=[
-"infoqqsnippets"=>[
-  'card_name'=>"BlogCard",   
+"group_contacts_"=>[
+  'card_name'=>"UserLongCard",   
    "replacements"=>[
     "editLink"=>"editlink",
-    "photoNode"=>"media",
-    "node1"=>"title",
-    "node2"=>"tag",
-    "node3"=>"date_created"
+    "photoNode"=>"photo",
+    "node1"=>"name",
+    "node2"=>"mobile",
+    "node3"=>"_groups_group_name_group_id"
     ]
   
   ]
@@ -93,12 +89,12 @@ $additional_details_segment_title="";
   
 $col_size_def='col-md-12';
 
-$def_profile_container_class="col-md-11 rounded text-left p-2 mb-0  bg-white ";
+$def_profile_container_class="col-md-12 rounded text-left p-2 mb-0  bg-white ";
 $def_profile_inner_container_class="col-md-12 p-2 pr-lg-4 pl-lg-4 m-0";  
-$override_justify_class="justify-content-center";
+$override_justify_class="justify-content-start";
 $overide_img_section_class="col-md-6 mr-lg-5";
 $override_large_col_size="col-md-12 hive_data_cell";
-$image_style_="rounded_avatar";
+$image_style_="product_image";
 ///=================================== basic template setup 
 
 
@@ -124,13 +120,14 @@ $write_profile_query_line=$write_profile_file; // yes || ""
 // @extract config 
 // @show cols 
 // 
-// custom
+// @clone custom
 
 
 $milknavbar="adminnav.php"; // milknavbar
 
 eval(find_snippet("990"));
 eval(find_snippet("1011"));
+
 
 $camelcasetbl=strtoCamelCase($last_file_name);
 $camelcasetbl_prefix=strtoCamelCase($last_file_name, true);
@@ -179,15 +176,6 @@ import  ".$camelcasetbl_prefix."List from './".$camelcasetbl_prefix."List';
 import logo from '../../../img/logo/logo.png'; // outside public!
 import  ".$camelcasetbl_prefix."List from './".$camelcasetbl_prefix."List';
  
-//depositbymode data & component 
-//list 
-import DeposithistoryList from '../../depositbymode/uiControl/DeposithistoryList';
-import {InteprateDeposithistoryEvent} from '../../depositbymode/dataControl/DeposithistoryRequestHandler';
-
-//profile 
-import DeposithistoryProfile from '../../depositbymode/uiControl/DeposithistoryProfile';
-
-
 import { 
          MosyDateInputComponent,
          SubmitButtons,
@@ -200,9 +188,15 @@ import {
 */
 
 $additional_imports="
-import logo from '../../../img/logo/logo.png'; // outside public!
-
 import  ".$camelcasetbl_prefix."List from './".$camelcasetbl_prefix."List';
+
+//nozzles data & component 
+//list 
+import FuelnozzlesList from '../../nozzles/UiControl/FuelnozzlesList';
+import {InteprateFuelnozzlesEvent} from '../../nozzles/dataControl/FuelnozzlesRequestHandler';
+
+//profile 
+import FuelnozzlesProfile from '../../nozzles/UiControl/FuelnozzlesProfile';
 
 import { 
          SubmitButtons,
@@ -210,33 +204,23 @@ import {
          LiveSearchDropdown,
          MosySmartField,
          MosyActionButton,
-         SmartDropdown,
-         MosyImageViewer,
-         MosyFileUploadButton
+         SmartDropdown
        } from '../../UiControl/componentControl';
-import { MosyLiveSearch } from '../../UiControl/customUI';
 
 ";
 
 $additional_list_imports="
-import logo from '../../../img/logo/logo.png'; // outside public!
 
-import { MosyLiveSearch } from '../../UiControl/customUI';
 ";
 
-$customProfileData="{}";
-/*$customProfileData='
-//bank id data 
+$customProfileData='
+//pump Nozzles pump id data 
 {
-    deposit_file_id : (bankingNode?.record_id || ""),
-    station_id : (bankingNode?.station_id || ""),
-    shift_id : (bankingNode?.shift_code || ""),
-    _fuel_stations_station_name_station_id: (bankingNode?._fuel_stations_station_name_station_id || ""),
-    _banking_record_id_deposit_file_id: (bankingNode?.record_id || "")
+    pump_id : (fuel_pumpsNode?.record_id || ""),
+    _fuel_pumps_pump_name_pump_id : (fuel_pumpsNode?.pump_name | "")
 }
 
-';*/
- 
+';
 
 //main widget configs
 $widget_and_ist_array=[
@@ -248,16 +232,14 @@ $widget_and_ist_array=[
 /// mini list creator configs
 $mini_list_array=[
   
-     //"tag ='\${infosnippetsNode?.tag}' order by primkey desc "=>''.$camelcasetbl_prefix.'List:{`Related ${infosnippetsNode?.tag} Notes`}:../snippets/list:::InteprateInfosnippetsEvent', 
-     //""=>''.$camelcasetbl_prefix.'List:{`More Notes`}:../snippets/list:::InteprateInfosnippetsEvent', 
-     //"deposit_file_id='\${bankingNode?.record_id}' order by primkey desc "=>'DeposithistoryList:{`Deposits list`}:../inventory/fuel::hide:InteprateDeposithistoryEvent', 
+     //""=>''.$camelcasetbl_prefix.'List:{`More pumps`}:../inventory/fuel::hide:InteprateFuelpumpsEvent', 
+     "pump_id='\${fuel_pumpsNode?.record_id}' order by primkey desc "=>'FuelnozzlesList:{`${fuel_pumpsNode?.pump_name} Nozzle list`}:../inventory/fuel::hide:InteprateFuelnozzlesEvent', 
     
   ];
 
 /// mini list creator configs
 $subprofile_list_array=[
-    /*"where deposit_file_id ='\${bankingNode?.record_id}' order by primkey desc  "=>'DeposithistoryProfile:{`Manage Deposits`}:../staff:../staff/profile:hide:InteprateDeposithistoryEvent
-:setDeposithistoryCustomProfileQuery:deposits_by_mode', */ 
+     "where pump_id ='\${fuel_pumpsNode?.record_id}' order by primkey desc  "=>'FuelnozzlesProfile:{`Manage Nozzles`}:../staff:../staff/profile:hide:InteprateFuelnozzlesEvent:SetFuelnozzlesCustomProfileQuery:fuel_pump_nozzles', 
 
   ];
 
@@ -266,31 +248,6 @@ $subprofile_list_array=[
 $list_btn_table_array=[
   
   $primary_table__=>[
-          
-    /*"tag: Search by tag"=>"
-      MosyLiveSearch({
-        api:' /api/infowell/snippets/infosnippets', 
-        displayField:'tag', 
-        tableName:'infosnippets',
-        actionName : 'mosyfilter',
-        title:'Search by tag',
-        actionData : {path: '../snippets/list', router : router , qstr : `tag='{{tag}}'`, stateSetters : stateItemSetters}        
-        })
-        
-        ",
-    
-    "bolt: Search by title"=>"
-      MosyLiveSearch({
-        api:' /api/infowell/snippets/infosnippets', 
-        displayField:'title', 
-        tableName:'infosnippets',
-        actionName : 'mosyfilter',
-        title:'Search by title',
-        actionData : {path: '../snippets/list', router : router , qstr : `primkey='{{primkey}}'`, stateSetters : stateItemSetters}        
-        })
-        
-        ",  */ 
-    
       //"edit: Review request"=>"console.log(`first next js button....`)",
       //"search: Search users"=>"console.log(`first next js button users test....`)",
       //"refresh: sync work schedule"=>"syncWorkSchedule()"
@@ -302,18 +259,6 @@ $list_btn_table_array=[
 $profile_btn_table_array=[
   
   $primary_table__=>[
-    /*"copy: Find notes"=>"
-      MosyLiveSearch({
-        api:' /api/infowell/snippets/infosnippets', 
-        displayField:'title', 
-        tableName:'infosnippets',
-        actionName : 'load_profile',
-        title:'Search by title',
-        actionData : {path: '../snippets/profile', router : router , token : `{{primkey}}`, stateSetters : stateItemSetters , actionName:`load_profile`}        
-        })
-        
-        ",  */ 
-    
       //"edit: Review request"=>"console.log(`first next js button....`)",
       //"search: Search users"=>"console.log(`first next js button users test....`)",
       //"refresh: sync work schedule"=>"syncWorkSchedule()"
