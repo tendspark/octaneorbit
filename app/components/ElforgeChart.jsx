@@ -39,7 +39,7 @@ export default function ElforgeChart({
 
    const renderLegendText = (value) => {
     const maxLength = 7;
-    const isTrimmed = value.length > maxLength;
+    const isTrimmed = value?.length > maxLength;
     const displayText = isTrimmed ? value.slice(0, maxLength) + '…' : value;
   
     return <span title={value}>{displayText}</span>;

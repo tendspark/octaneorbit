@@ -22,7 +22,7 @@ const saAuthConfigs = {
   sessionColumns : "user_id,email,tel,name",
 
   // Post-login redirect
-  afterSplashPage:`${hiveRoutes.octaneorbit}/dashboard/main`,
+  afterSplashPage:`${hiveRoutes.octaneorbit}/dashboard/overview`,
 
   // UI toggles
   showResetLink: false, // true || false
